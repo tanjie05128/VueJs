@@ -78,7 +78,6 @@
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 100);
-        console.log(index);
       },
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
