@@ -17,6 +17,13 @@
         </div>
       </div>
     </div>
+    <div class="ball-container">
+      <transition-group name="drop" tag="ul">
+        <li v-for="(ball,key) in balls" :key="ball.id" v-show="ball.show" class="ball">
+          <div class="inner inner-hook"></div>
+        </li>
+      </transition-group>
+    </div>
   </div>
 </template>
 
@@ -41,6 +48,33 @@
         type: Number,
         default: 0
       }
+    },
+    data() {
+      return {
+        balls: [
+          {
+            show: false,
+            id: 0
+          },
+          {
+            show: false,
+            id: 1
+          },
+          {
+            show: false,
+            id: 2
+          },
+          {
+            show: false,
+            id: 3
+          },
+          {
+            show: false,
+            id: 4
+          }
+        ],
+        dropBalls: []
+      };
     },
     computed: {
       totalPrice() {
@@ -72,6 +106,61 @@
           return 'not-enougn';
         } else {
           return 'enough';
+        }
+      }
+    },
+    created() {
+      this.$root.eventHub.$on('cart.add', this.drop);
+    },
+    methods: {
+      drop(el) {
+        console.log(el);
+        for (let i = 0, l = this.balls.length; i < l; i++) {
+          let ball = this.balls[i];
+          if (!ball.show) {
+            ball.show = true;
+            ball.el = el;
+            this.dropBalls.push(ball);
+            return;
+          }
+        }
+      },
+      beforeEnter(el) {
+        let count = this.balls.length;
+        while (count--) {
+          let ball = this.balls[count];
+          if (ball.show) {
+            let rect = ball.el.getBoundingClientRect();
+            console.log(rect);
+            let x = rect.left - 32;
+            let y = -(window.innerHeight - rect.top - 22);
+            el.style.display = '';
+            el.style.webkitTransform = `translate3d(0,${y}px,0)`;
+            el.style.transform = `translate3d(0,${y}px,0)`;
+            let inner = el.getElementsByClassName('inner-hook')[0];
+//            let inner = el.querySelector('.inner-hook');
+            inner.style.webkitTransform = `translate3d(${x}px,0,0)`;
+            inner.style.transform = `translate3d(${x}px,0,0)`;
+          }
+        }
+      },
+      enter(el) {
+        /* eslint-disable no-unused-vars */
+        let rf = el.offsetHeight;
+        this.$nextTick(() => {
+          el.style.webkitTransform = 'translate3d(0,0,0)';
+          el.style.transform = 'translate3d(0,0,0)';
+          let inner = el.getElementsByClassName('inner-hook')[0];
+//          let inner = el.querySelector('.inner-hook');
+          inner.style.webkitTransform = 'translate3d(0,0,0)';
+          inner.style.transform = 'translate3d(0,0,0)';
+        });
+      },
+      afterEnter(el) {
+        let ball = this.dropBalls.shift();
+        if (ball) {
+          ball.show = false;
+          el.style.display = 'none';
         }
       }
     }
@@ -166,4 +255,19 @@
             background: #2b333b;
           &.enough
             background: #00b43c
+
+    .ball-container
+      .ball
+        position: fixed
+        left: 32px
+        bottom: 22px
+        z-index: 200
+        &.drop-enter, &.drop-enter-active
+          transition: all 0.4s cublic-bezier(0.49,-0.29,0.75,0.41)
+          .inner
+            width: 16px
+            height: 16px
+            border-radius: 50%
+            background: rgb(0,160,220)
+            transition: all 0.4s linear
 </style>
