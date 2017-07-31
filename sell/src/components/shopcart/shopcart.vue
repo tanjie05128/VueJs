@@ -12,8 +12,8 @@
         <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
       </div>
       <div class="content-right">
-        <div class="pay">
-          ￥{{minPrice}}元起送
+        <div class="pay" :class="payClass">
+          {{payDesc}}
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
           return [
             {
               price: 10,
-              count: 26
+              count: 2
             }
           ];
         }
@@ -56,6 +56,23 @@
           count += food.count;
         });
         return count;
+      },
+      payDesc() {
+        if (this.totalPrice === 0) {
+          return `￥${this.minPrice}元起送`;
+        } else if (this.totalPrice < this.minPrice) {
+          let diff = Math.ceil((this.minPrice - this.totalPrice) * 10) / 10;
+          return `还差￥${diff}`;
+        } else {
+          return '去结算';
+        }
+      },
+      payClass() {
+        if (this.totalPrice < this.minPrice) {
+          return 'not-enougn';
+        } else {
+          return 'enough';
+        }
       }
     }
   };
@@ -73,7 +90,7 @@
       display: flex
       background: #141d27
       font-size: 0
-      color: rgba(255,255,255,0.4)
+      color: rgba(255, 255, 255, 0.4)
       .content-left
         flex: 1
         .logo-wrapper
@@ -115,7 +132,7 @@
             font-weight: 700
             color: #fff
             background: rgb(240, 20, 20);
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
         .price
           display: inline-block
           vertical-align: top
@@ -123,7 +140,7 @@
           margin-top: 12px
           box-sizing: border-box
           padding-right: 12px
-          border-right:1px solid rgba(255,255,255,0.1)
+          border-right: 1px solid rgba(255, 255, 255, 0.1)
           font-size: 16px
           font-weight: 700
           &.highlight
@@ -143,5 +160,10 @@
           text-align: center
           font-size: 12px
           font-weight: 700
+          color: #fff
           background: #2b333b;
+          &.not-enough
+            background: #2b333b;
+          &.enough
+            background: #00b43c
 </style>
