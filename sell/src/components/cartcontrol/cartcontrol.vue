@@ -24,6 +24,7 @@
     },
     methods: {
       addCart(event) {
+        console.log(event);
         if (!event._constructed) {
           return;
         }
@@ -32,6 +33,7 @@
         } else {
           this.food.count++;
         }
+//        console.log(this.$root.eventHub);
         this.$root.eventHub.$emit('cart.add', event.target);
       },
       decreaseCart(event) {
