@@ -63,6 +63,7 @@
       };
     },
     computed: {
+      // 计算每个右侧食物详情的区间key值
       currentIndex() {
         for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i];
@@ -73,6 +74,7 @@
         }
         return 0;
       },
+      // 计算被选择的食物，存入foods
       selectFoods() {
         let foods = [];
         this.goods.forEach((good) => {
@@ -112,6 +114,7 @@
           this.scrollY = Math.abs(Math.round(pos.y));
         });
       },
+//      计算右侧每个食物区间距离顶部滚出的高度,定义出每个区间的值存入listHeight里面
       _calculateHeight() {
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
         let height = 0;

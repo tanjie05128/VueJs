@@ -68,6 +68,7 @@
       deliveryPrice: {
         type: Number
       },
+      // 由父组件传入的子组件的最小起送价格,有默认值
       minPrice: {
         type: Number,
         default: 0
@@ -104,6 +105,7 @@
         });
         return total;
       },
+      // 计算选中的商品数量，若没有则购物车不会出现激活样式
       totalCount() {
         let count = 0;
         this.selectFoods.forEach((food) => {
