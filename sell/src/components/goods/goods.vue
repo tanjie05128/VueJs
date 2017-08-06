@@ -154,12 +154,12 @@
       shopcart: shopcart,
       cartcontrol: cartcontrol,
       food: food
-    },
-    events: {
-      'cart.add'(target) {
-        this._drop(target);
-      }
     }
+//    events: {
+//      'cart.add'(target) {
+//        this._drop(target);
+//      }
+//    }
   };
 </script>
 
