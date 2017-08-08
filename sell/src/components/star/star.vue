@@ -44,7 +44,7 @@
   };
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" type="text/stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
 
   .star
@@ -74,6 +74,8 @@
         margin-right: 16px
         -webkit-background-size: 15px 15px
         background-size: 15px 15px
+        @media only screen and (max-width: 375px)
+          margin-right: 8px
         &:last-child
           margin-right: 0
         &.on

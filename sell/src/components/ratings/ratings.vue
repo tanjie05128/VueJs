@@ -61,6 +61,9 @@
         border-right:1px solid rgba(7,17,27,0.1)
         text-align: center
         padding: 6px 0
+        @media only screen and (max-width: 320px)
+          flex: 0 0 120px
+          width: 120px
         .score
           margin-bottom: 6px
           line-height: 28px
@@ -78,6 +81,8 @@
       .overview-right
         flex: 1
         padding: 6px 0 6px 24px
+        @media only screen and (max-width: 320px)
+          padding-left: 6px
         .score-wrapper
           margin-bottom: 8px
           line-height: 18px
@@ -91,6 +96,8 @@
             display: inline-block
             margin: 0 12px
             vertical-align: top
+            @media only screen and (max-width: 320px)
+              margin: 0 6px
           .score
             display: inline-block
             line-height: 18px
@@ -100,7 +107,7 @@
         .delivery-wrapper
           font-size: 0
           .title
-            line-height: 18px
+            display: inline-block
             font-size: 12px
             color: rgb(7,17,27)
           .delivery
