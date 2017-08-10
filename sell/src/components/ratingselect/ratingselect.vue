@@ -57,6 +57,7 @@
      }
    },
    methods: {
+//     select方法的作用是将点击的type类型通知到父组件，以便重新更新ratingselect组件
      select(type, event) {
        if (!event._constructed) {
          return;
