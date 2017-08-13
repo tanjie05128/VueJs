@@ -14,25 +14,36 @@
       </div>
     </div>
     <!--路由外链-->
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import header from './components/header/header';
+//  import {urlParse} from 'common/js/util';
 
   const ERR_OK = 0;
 
   export default {
     data() {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+//            下面这个id是在localStorage里面存储用户关注商家的，若放开则需要在地址栏填入？id=12345这类url
+//            let queryParam = urlParse();
+//            return queryParam.id;
+          })()
+        }
       };
     },
     created() {
       this.$http.get('/api/seller').then((response) => {
+//      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
         response = response.body;
         if (response.errno === ERR_OK) {
+//          this.seller = Object.assign({}, this.seller, response.data);
           this.seller = response.data;
 //          console.log(this.seller);
         }

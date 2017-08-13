@@ -8,6 +8,7 @@ import VueResource from 'vue-resource';
 import goods from 'components/goods/goods';
 import ratings from 'components/ratings/ratings';
 import seller from 'components/seller/seller';
+import header from 'components/header/header';
 
 import 'common/stylus/index.styl';
 
@@ -18,12 +19,37 @@ Vue.use(VueResource);
 Vue.use(Vuex);
 
 const routes = [
-  { path: '/goods', component: goods },
-  { path: '/ratings', component: ratings },
-  { path: '/seller', component: seller }
+  {
+    path: '/',
+    redirect: '/goods', // 重定向
+    name: 'goods',
+    component: goods
+  },
+  {
+    path: '/goods',
+    name: 'goods',
+    component: goods
+  },
+  {
+    path: '/header',
+    name: 'header',
+    component: header
+  },
+  {
+    path: '/seller',
+    name: 'seller',
+    component: seller
+  },
+  {
+    path: '/ratings',
+    name: 'ratings',
+    component: ratings
+  }
 ];
 
 let router = new VueRouter({
+  mode: 'history',
+  base: '/',
   routes,
   linkActiveClass: 'active'
 });
