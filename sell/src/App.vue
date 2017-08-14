@@ -39,9 +39,11 @@
       };
     },
     created() {
-      this.$http.get('/api/seller').then((response) => {
+      this.$http.get('https://www.easy-mock.com/mock/59914d11a1d30433d8610f39/elem/api/seller').then((response) => {
+//      this.$http.get('/api/seller').then((response) => {
 //      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
         response = response.body;
+        this.seller = response.seller;
         if (response.errno === ERR_OK) {
 //          this.seller = Object.assign({}, this.seller, response.data);
           this.seller = response.data;

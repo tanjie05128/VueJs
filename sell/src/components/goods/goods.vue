@@ -139,8 +139,13 @@
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
 
-      this.$http.get('/api/goods').then((response) => {
+      this.$http.get('https://www.easy-mock.com/mock/59914d11a1d30433d8610f39/elem/api/goods').then((response) => {
         response = response.body;
+        this.goods = response.goods;
+        this.$nextTick(() => {
+          this._initScroll();
+          this._calculateHeight();
+        });
         if (response.errno === ERR_OK) {
           this.goods = response.data;
           this.$nextTick(() => {

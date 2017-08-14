@@ -36,7 +36,7 @@ const routes = [
     component: header
   },
   {
-    path: '/seller',
+    path: 'https://www.easy-mock.com/mock/59914d11a1d30433d8610f39/elem/api/seller',
     name: 'seller',
     component: seller
   },
